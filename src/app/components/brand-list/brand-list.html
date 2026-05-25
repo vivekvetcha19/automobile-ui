@@ -1,0 +1,73 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Brand List</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="toggleCreateForm()">
+
+      Add
+
+    </button>
+
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Created Date</th>
+        <th>Actions</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let brand of brands">
+
+        <td>{{ brand.id }}</td>
+        <td>{{ brand.name }}</td>
+        <td>{{ brand.country }}</td>
+        <td>{{ brand.createdDate }}</td>
+        <td>
+
+        <button
+            class="btn btn-warning btn-sm"
+            (click)="editBrand(brand)">
+
+            Edit
+
+        </button>
+
+        <button
+            class="btn btn-danger btn-sm ms-2"
+            (click)="deleteBrand(brand.id)">
+
+            Delete
+
+        </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div *ngIf="showCreateForm">
+
+    <app-create-brand
+    [selectedBrand]="selectedBrand">
+    </app-create-brand>
+
+  </div>
+
+</div>
