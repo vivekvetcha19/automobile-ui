@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 
-import { BrandList } from './components/brand-list/brand-list';
+import { RouterOutlet } from '@angular/router';
+
+import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
   imports: [
-    BrandList
+    RouterOutlet,
+    Navbar
   ],
 
   templateUrl: './app.html',
