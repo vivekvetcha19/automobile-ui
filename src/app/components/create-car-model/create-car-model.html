@@ -1,0 +1,106 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>
+
+      {{ model.id > 0
+        ? 'Update Car Model'
+        : 'Create Car Model' }}
+
+    </h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- MODEL NAME -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Model Name
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="model.name"
+          maxlength="100"
+          required>
+
+      </div>
+
+      <!-- PRICE -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Price
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="price"
+          [(ngModel)]="model.price"
+          min="1"
+          required>
+
+      </div>
+
+      <!-- BRAND -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Brand
+
+        </label>
+
+        <select
+          class="form-select"
+          name="brandId"
+          [(ngModel)]="model.brandId">
+
+          <option [value]="0">
+
+            Select Brand
+
+          </option>
+
+          <option
+            *ngFor="let brand of brands"
+            [value]="brand.id">
+
+            {{ brand.name }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ model.id > 0
+          ? 'Update Model'
+          : 'Create Model' }}
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
