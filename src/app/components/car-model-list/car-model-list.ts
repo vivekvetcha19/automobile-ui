@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef
+} from '@angular/core';
+
 import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { CarModelService } from '../../services/car-model.service';
-
 import { CarModel } from '../../models/car-model.model';
 
 import { CreateCarModelComponent } from '../create-car-model/create-car-model';
@@ -19,7 +26,8 @@ import { CreateCarModelComponent } from '../create-car-model/create-car-model';
   templateUrl: './car-model-list.html',
   styleUrl: './car-model-list.css'
 })
-export class CarModelListComponent implements OnInit {
+export class CarModelListComponent
+  implements OnInit, OnDestroy {
 
   models: CarModel[] = [];
 
@@ -27,8 +35,11 @@ export class CarModelListComponent implements OnInit {
 
   selectedModel: CarModel | null = null;
 
+  private destroy$ = new Subject<void>();
+
   constructor(
-    private carModelService: CarModelService
+    private carModelService: CarModelService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -39,23 +50,30 @@ export class CarModelListComponent implements OnInit {
 
   loadModels(): void {
 
-    this.carModelService.getModels().subscribe({
+    this.carModelService.getModels()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
 
-      next: (data: CarModel[]) => {
+        next: (data: CarModel[]) => {
 
-        console.log(data);
+          console.log('Models Loaded:', data);
 
-        this.models = data;
+          this.models = data;
 
-      },
+          this.cdr.detectChanges();
 
-      error: (err: any) => {
+        },
 
-        console.error(err);
+        error: (err: any) => {
 
-      }
+          console.error(
+            'Error loading models:',
+            err
+          );
 
-    });
+        }
+
+      });
 
   }
 
@@ -100,6 +118,7 @@ export class CarModelListComponent implements OnInit {
     }
 
     this.carModelService.deleteModel(id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
 
         next: () => {
@@ -112,15 +131,28 @@ export class CarModelListComponent implements OnInit {
             model => model.id !== id
           );
 
+          this.cdr.detectChanges();
+
         },
 
         error: (err: any) => {
 
-          console.error(err);
+          console.error(
+            'Error deleting model:',
+            err
+          );
 
         }
 
       });
+
+  }
+
+  ngOnDestroy(): void {
+
+    this.destroy$.next();
+
+    this.destroy$.complete();
 
   }
 
