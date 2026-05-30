@@ -22,7 +22,7 @@
 
         <label class="form-label">
 
-          Model Name
+          Model Name <span class="text-danger">*</span>
 
         </label>
 
@@ -31,8 +31,15 @@
           class="form-control"
           name="name"
           [(ngModel)]="model.name"
-          maxlength="100"
-          required>
+          maxlength="100">
+
+        <div
+          *ngIf="nameError"
+          class="text-danger mt-1">
+
+          {{ nameError }}
+
+        </div>
 
       </div>
 
@@ -42,7 +49,7 @@
 
         <label class="form-label">
 
-          Price
+          Price <span class="text-danger">*</span>
 
         </label>
 
@@ -51,8 +58,15 @@
           class="form-control"
           name="price"
           [(ngModel)]="model.price"
-          min="1"
-          required>
+          min="1">
+
+        <div
+          *ngIf="priceError"
+          class="text-danger mt-1">
+
+          {{ priceError }}
+
+        </div>
 
       </div>
 
@@ -62,7 +76,7 @@
 
         <label class="form-label">
 
-          Brand
+          Brand <span class="text-danger">*</span>
 
         </label>
 
@@ -86,6 +100,14 @@
           </option>
 
         </select>
+
+        <div
+          *ngIf="brandError"
+          class="text-danger mt-1">
+
+          {{ brandError }}
+
+        </div>
 
       </div>
 

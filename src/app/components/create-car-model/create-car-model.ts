@@ -15,7 +15,6 @@ import { BrandService } from '../../services/brand.service';
 import { CarModelService } from '../../services/car-model.service';
 
 import { Brand } from '../../models/brand.model';
-import { CreateCarModel } from '../../models/create-car-model.model';
 
 @Component({
   selector: 'app-create-car-model',
@@ -35,6 +34,14 @@ export class CreateCarModelComponent
   @Output() modelSaved = new EventEmitter<void>();
 
   brands: Brand[] = [];
+
+  // VALIDATION MESSAGES
+
+  nameError: string = '';
+
+  priceError: string = '';
+
+  brandError: string = '';
 
   model: any = {
     id: 0,
@@ -75,42 +82,77 @@ export class CreateCarModelComponent
   loadBrands(): void {
 
     this.brandService.getBrands().subscribe({
+
       next: (data: Brand[]) => {
 
         this.brands = data;
 
       },
+
       error: (err: any) => {
+
         console.error(err);
+
       }
+
     });
 
   }
 
   onSubmit(): void {
 
-    if (
-      !this.model.name?.trim()
-    ) {
-      alert('Model Name is required');
+    // CLEAR OLD ERRORS
+
+    this.nameError = '';
+
+    this.priceError = '';
+
+    this.brandError = '';
+
+    // NAME VALIDATION
+
+    if (!this.model.name?.trim()) {
+
+      this.nameError =
+        'Model Name is required';
+
       return;
+
     }
 
-    if (
-      this.model.price <= 0
-    ) {
-      alert('Price must be greater than 0');
+    if (this.model.name.length > 100) {
+
+      this.nameError =
+        'Maximum length is 100 characters';
+
       return;
+
     }
 
-    if (
-      this.model.brandId <= 0
-    ) {
-      alert('Please select a Brand');
+    // PRICE VALIDATION
+
+    if (this.model.price <= 0) {
+
+      this.priceError =
+        'Price must be greater than 0';
+
       return;
+
+    }
+
+    // BRAND VALIDATION
+
+    if (this.model.brandId <= 0) {
+
+      this.brandError =
+        'Please select a Brand';
+
+      return;
+
     }
 
     // UPDATE
+
     if (
       this.model.id &&
       this.model.id > 0
@@ -131,7 +173,9 @@ export class CreateCarModelComponent
           },
 
           error: (err: any) => {
+
             console.error(err);
+
           }
 
         });
@@ -139,6 +183,7 @@ export class CreateCarModelComponent
     }
 
     // CREATE
+
     else {
 
       this.carModelService
@@ -152,10 +197,12 @@ export class CreateCarModelComponent
             );
 
             this.model = {
+
               id: 0,
               name: '',
               price: 0,
               brandId: 0
+
             };
 
             this.modelSaved.emit();
@@ -163,7 +210,9 @@ export class CreateCarModelComponent
           },
 
           error: (err: any) => {
+
             console.error(err);
+
           }
 
         });
