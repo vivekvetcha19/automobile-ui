@@ -34,21 +34,50 @@ export class BrandList implements OnInit {
 
     console.log('ngOnInit executed');
 
-    this.brandService.getBrands().subscribe({
-      next: (data: Brand[]) => {
-        console.log(data);
-        this.brands = data;
-      },
-      error: (err: any) => {
-        console.error(err);
-      }
-    });
+    this.loadBrands();
+
+  }
+
+  // NEW METHOD
+  loadBrands(): void {
+
+  this.brandService.getBrands().subscribe({
+    next: (data: Brand[]) => {
+
+      console.log('Brands Loaded:', data);
+
+      this.brands = data;
+
+      console.log('After Assignment:', this.brands);
+      console.log('Length:', this.brands.length);
+
+    },
+    error: (err: any) => {
+      console.error(err);
+    }
+  });
+
+ }
+  // NEW METHOD
+  onBrandSaved(): void {
+
+    this.loadBrands();
+
+    this.showCreateForm = false;
+
+    this.selectedBrand = null;
 
   }
 
   // TOGGLE CREATE FORM
   toggleCreateForm(): void {
+
     this.showCreateForm = !this.showCreateForm;
+
+    if (!this.showCreateForm) {
+      this.selectedBrand = null;
+    }
+
   }
 
   // EDIT BRAND
@@ -62,33 +91,34 @@ export class BrandList implements OnInit {
 
   }
 
+  // DELETE BRAND
   deleteBrand(id: number): void {
 
-  const confirmDelete = confirm(
-    'Are you sure you want to delete this brand?'
-  );
+    const confirmDelete = confirm(
+      'Are you sure you want to delete this brand?'
+    );
 
-  if (!confirmDelete) {
-    return;
-  }
-
-  this.brandService.deleteBrand(id).subscribe({
-
-    next: () => {
-
-      alert('Brand Deleted Successfully');
-
-      this.brands = this.brands.filter(
-        brand => brand.id !== id
-      );
-
-    },
-
-    error: (err: any) => {
-      console.error(err);
+    if (!confirmDelete) {
+      return;
     }
 
-  });
+    this.brandService.deleteBrand(id).subscribe({
+
+      next: () => {
+
+        alert('Brand Deleted Successfully');
+
+        this.brands = this.brands.filter(
+          brand => brand.id !== id
+        );
+
+      },
+
+      error: (err: any) => {
+        console.error(err);
+      }
+
+    });
 
   }
 

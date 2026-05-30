@@ -36,23 +36,24 @@
         <td>{{ brand.name }}</td>
         <td>{{ brand.country }}</td>
         <td>{{ brand.createdDate }}</td>
+
         <td>
 
-        <button
+          <button
             class="btn btn-warning btn-sm"
             (click)="editBrand(brand)">
 
             Edit
 
-        </button>
+          </button>
 
-        <button
+          <button
             class="btn btn-danger btn-sm ms-2"
             (click)="deleteBrand(brand.id)">
 
             Delete
 
-        </button>
+          </button>
 
         </td>
 
@@ -65,7 +66,8 @@
   <div *ngIf="showCreateForm">
 
     <app-create-brand
-    [selectedBrand]="selectedBrand">
+      [selectedBrand]="selectedBrand"
+      (brandSaved)="onBrandSaved()">
     </app-create-brand>
 
   </div>

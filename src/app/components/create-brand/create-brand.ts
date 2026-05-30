@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   OnChanges,
   SimpleChanges
 } from '@angular/core';
@@ -9,8 +11,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { BrandService } from '../../services/brand.service';
-
-import { CreateBrand } from '../../models/create-brand.model';
 
 @Component({
   selector: 'app-create-brand',
@@ -23,6 +23,9 @@ export class CreateBrandComponent implements OnChanges {
 
   // RECEIVE DATA FROM PARENT
   @Input() selectedBrand: any;
+
+  // SEND EVENT TO PARENT
+  @Output() brandSaved = new EventEmitter<void>();
 
   brand: any = {
     id: 0,
@@ -49,13 +52,37 @@ export class CreateBrandComponent implements OnChanges {
 
   onSubmit(): void {
 
+    // REQUIRED FIELD VALIDATION
+    if (
+      !this.brand.name?.trim() ||
+      !this.brand.country?.trim()
+    ) {
+      alert('Name and Country are required');
+      return;
+    }
+
+    // MAX LENGTH VALIDATION
+    if (
+      this.brand.name.length > 100 ||
+      this.brand.country.length > 100
+    ) {
+      alert('Maximum length is 100 characters');
+      return;
+    }
+
     // UPDATE MODE
     if (this.brand.id && this.brand.id > 0) {
 
       this.brandService.updateBrand(this.brand).subscribe({
         next: (response) => {
+
           console.log(response);
+
           alert('Brand Updated Successfully');
+
+          // NOTIFY PARENT
+          this.brandSaved.emit();
+
         },
         error: (err: any) => {
           console.error(err);
@@ -69,8 +96,21 @@ export class CreateBrandComponent implements OnChanges {
 
       this.brandService.createBrand(this.brand).subscribe({
         next: (response) => {
+
           console.log(response);
+
           alert('Brand Created Successfully');
+
+          // CLEAR FORM
+          this.brand = {
+            id: 0,
+            name: '',
+            country: ''
+          };
+
+          // NOTIFY PARENT
+          this.brandSaved.emit();
+
         },
         error: (err: any) => {
           console.error(err);

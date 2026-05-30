@@ -11,7 +11,14 @@
         type="text"
         class="form-control"
         [(ngModel)]="brand.name"
-        name="name">
+        name="name"
+        required
+        maxlength="100">
+        <small
+          class="text-danger"
+          *ngIf="brand.name && brand.name.length >= 100">
+           Maximum 100 characters allowed
+        </small>
     </div>
 
     <div class="mb-3">
@@ -21,11 +28,22 @@
         type="text"
         class="form-control"
         [(ngModel)]="brand.country"
-        name="country">
+        name="country"
+        required
+        maxlength="100">
+        <small
+          class="text-danger"
+          *ngIf="brand.country && brand.country.length >= 100">
+          Maximum 100 characters allowed
+        </small>
     </div>
 
-    <button class="btn btn-primary">
-      Create Brand
+    <button
+      class="btn btn-primary"
+      [disabled]="!brand.name?.trim() || !brand.country?.trim()">
+
+      {{ brand.id > 0 ? 'Update Brand' : 'Create Brand' }}
+
     </button>
 
   </form>
