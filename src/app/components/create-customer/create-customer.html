@@ -1,0 +1,145 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>
+
+      {{ customer.id > 0
+        ? 'Update Customer'
+        : 'Create Customer' }}
+
+    </h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- FIRST NAME -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          First Name
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          [(ngModel)]="customer.firstName"
+          maxlength="100">
+
+        <div
+          *ngIf="firstNameError"
+          class="text-danger mt-1">
+
+          {{ firstNameError }}
+
+        </div>
+
+      </div>
+
+      <!-- LAST NAME -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Last Name
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          [(ngModel)]="customer.lastName"
+          maxlength="100">
+
+        <div
+          *ngIf="lastNameError"
+          class="text-danger mt-1">
+
+          {{ lastNameError }}
+
+        </div>
+
+      </div>
+
+      <!-- EMAIL -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Email
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="customer.email"
+          maxlength="150">
+
+        <div
+          *ngIf="emailError"
+          class="text-danger mt-1">
+
+          {{ emailError }}
+
+        </div>
+
+      </div>
+
+      <!-- PHONE NUMBER -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Phone Number
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="phoneNumber"
+          [(ngModel)]="customer.phoneNumber"
+          maxlength="20">
+
+        <div
+          *ngIf="phoneError"
+          class="text-danger mt-1">
+
+          {{ phoneError }}
+
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ customer.id > 0
+          ? 'Update Customer'
+          : 'Create Customer' }}
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

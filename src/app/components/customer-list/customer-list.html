@@ -1,0 +1,94 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Customer List</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="toggleCreateForm()">
+
+      Add
+
+    </button>
+
+  </div>
+
+  <table
+    class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+      <tr>
+
+        <th>Id</th>
+
+        <th>First Name</th>
+
+        <th>Last Name</th>
+
+        <th>Email</th>
+
+        <th>Phone Number</th>
+
+        <th>Created Date</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let customer of customers">
+
+        <td>{{ customer.id }}</td>
+
+        <td>{{ customer.firstName }}</td>
+
+        <td>{{ customer.lastName }}</td>
+
+        <td>{{ customer.email }}</td>
+
+        <td>{{ customer.phoneNumber }}</td>
+
+        <td>{{ customer.createdDate }}</td>
+
+        <td>
+
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="editCustomer(customer)">
+
+            Edit
+
+          </button>
+
+          <button
+            class="btn btn-danger btn-sm ms-2"
+            (click)="deleteCustomer(customer.id)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div *ngIf="showCreateForm">
+
+    <app-create-customer
+      [selectedCustomer]="selectedCustomer"
+      (customerSaved)="onCustomerSaved()">
+
+    </app-create-customer>
+
+  </div>
+
+</div>

@@ -1,0 +1,86 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Inventory</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="toggleCreateForm()">
+
+      Add
+
+    </button>
+
+  </div>
+
+  <table
+    class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+      <tr>
+
+        <th>Id</th>
+
+        <th>Car Model</th>
+
+        <th>Quantity In Stock</th>
+
+        <th>Last Updated</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let item of inventory">
+
+        <td>{{ item.id }}</td>
+
+        <td>{{ item.carModelName }}</td>
+
+        <td>{{ item.quantityInStock }}</td>
+
+        <td>{{ item.lastUpdated }}</td>
+
+        <td>
+
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="editInventory(item)">
+
+            Edit
+
+          </button>
+
+          <button
+            class="btn btn-danger btn-sm ms-2"
+            (click)="deleteInventory(item.id)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div *ngIf="showCreateForm">
+
+    <app-create-inventory
+      [selectedInventory]="selectedInventory"
+      (inventorySaved)="onInventorySaved()">
+
+    </app-create-inventory>
+
+  </div>
+
+</div>

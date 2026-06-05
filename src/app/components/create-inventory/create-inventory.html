@@ -1,0 +1,105 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>
+
+      {{ inventory.id > 0
+        ? 'Update Inventory'
+        : 'Create Inventory' }}
+
+    </h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- CAR MODEL -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Car Model
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="carModelId"
+          [(ngModel)]="inventory.carModelId">
+
+          <option [value]="0">
+
+            Select Car Model
+
+          </option>
+
+          <option
+            *ngFor="let model of carModels"
+            [value]="model.id">
+
+            {{ model.brandName }}
+            -
+            {{ model.name }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="carModelError"
+          class="text-danger mt-1">
+
+          {{ carModelError }}
+
+        </div>
+
+      </div>
+
+      <!-- QUANTITY -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Quantity In Stock
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="quantityInStock"
+          [(ngModel)]="inventory.quantityInStock"
+          min="0">
+
+        <div
+          *ngIf="quantityError"
+          class="text-danger mt-1">
+
+          {{ quantityError }}
+
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ inventory.id > 0
+          ? 'Update Inventory'
+          : 'Create Inventory' }}
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
