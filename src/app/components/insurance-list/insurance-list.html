@@ -1,0 +1,79 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Insurance Policies</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="toggleCreateForm()">
+
+      New Insurance
+
+    </button>
+
+  </div>
+
+  <table
+    class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+      <tr>
+
+        <th>Id</th>
+
+        <th>Customer</th>
+
+        <th>Car Model</th>
+
+        <th>Policy Number</th>
+
+        <th>Provider</th>
+
+        <th>Coverage Amount</th>
+
+        <th>Start Date</th>
+
+        <th>Expiry Date</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let insurance of insurances">
+
+        <td>{{ insurance.id }}</td>
+
+        <td>{{ insurance.customerName }}</td>
+
+        <td>{{ insurance.carModelName }}</td>
+
+        <td>{{ insurance.policyNumber }}</td>
+
+        <td>{{ insurance.providerName }}</td>
+
+        <td>{{ insurance.coverageAmount }}</td>
+
+        <td>{{ insurance.startDate }}</td>
+
+        <td>{{ insurance.expiryDate }}</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div *ngIf="showCreateForm">
+
+    <app-create-insurance
+      (insuranceSaved)="onInsuranceSaved()">
+
+    </app-create-insurance>
+
+  </div>
+
+</div>

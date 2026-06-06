@@ -1,0 +1,250 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>Create Insurance</h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- CUSTOMER -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Customer
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="customerId"
+          [(ngModel)]="insurance.customerId">
+
+          <option [value]="0">
+
+            Select Customer
+
+          </option>
+
+          <option
+            *ngFor="let customer of customers"
+            [value]="customer.id">
+
+            {{ customer.firstName }}
+            {{ customer.lastName }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="customerError"
+          class="text-danger mt-1">
+
+          {{ customerError }}
+
+        </div>
+
+      </div>
+
+      <!-- CAR MODEL -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Car Model
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="carModelId"
+          [(ngModel)]="insurance.carModelId">
+
+          <option [value]="0">
+
+            Select Car Model
+
+          </option>
+
+          <option
+            *ngFor="let model of carModels"
+            [value]="model.id">
+
+            {{ model.brandName }}
+            -
+            {{ model.name }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="carModelError"
+          class="text-danger mt-1">
+
+          {{ carModelError }}
+
+        </div>
+
+      </div>
+
+      <!-- POLICY NUMBER -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Policy Number
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="policyNumber"
+          [(ngModel)]="insurance.policyNumber"
+          maxlength="100">
+
+        <div
+          *ngIf="policyError"
+          class="text-danger mt-1">
+
+          {{ policyError }}
+
+        </div>
+
+      </div>
+
+      <!-- PROVIDER NAME -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Provider Name
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="providerName"
+          [(ngModel)]="insurance.providerName"
+          maxlength="200">
+
+        <div
+          *ngIf="providerError"
+          class="text-danger mt-1">
+
+          {{ providerError }}
+
+        </div>
+
+      </div>
+
+      <!-- COVERAGE AMOUNT -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Coverage Amount
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="coverageAmount"
+          [(ngModel)]="insurance.coverageAmount"
+          min="1">
+
+        <div
+          *ngIf="coverageError"
+          class="text-danger mt-1">
+
+          {{ coverageError }}
+
+        </div>
+
+      </div>
+
+      <!-- START DATE -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Start Date
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="date"
+          class="form-control"
+          name="startDate"
+          [(ngModel)]="insurance.startDate">
+
+        <div
+          *ngIf="startDateError"
+          class="text-danger mt-1">
+
+          {{ startDateError }}
+
+        </div>
+
+      </div>
+
+      <!-- EXPIRY DATE -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Expiry Date
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="date"
+          class="form-control"
+          name="expiryDate"
+          [(ngModel)]="insurance.expiryDate">
+
+        <div
+          *ngIf="expiryDateError"
+          class="text-danger mt-1">
+
+          {{ expiryDateError }}
+
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        Create Insurance
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Service History</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="toggleCreateForm()">
+
+      New Service
+
+    </button>
+
+  </div>
+
+  <table
+    class="table table-bordered table-striped table-hover">
+
+    <thead class="table-dark">
+
+      <tr>
+
+        <th>Id</th>
+
+        <th>Customer</th>
+
+        <th>Car Model</th>
+
+        <th>Service Description</th>
+
+        <th>Service Cost</th>
+
+        <th>Service Date</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let service of services">
+
+        <td>{{ service.id }}</td>
+
+        <td>{{ service.customerName }}</td>
+
+        <td>{{ service.carModelName }}</td>
+
+        <td>{{ service.serviceDescription }}</td>
+
+        <td>{{ service.serviceCost }}</td>
+
+        <td>{{ service.serviceDate }}</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div *ngIf="showCreateForm">
+
+    <app-create-service-history
+      (serviceSaved)="onServiceSaved()">
+
+    </app-create-service-history>
+
+  </div>
+
+</div>

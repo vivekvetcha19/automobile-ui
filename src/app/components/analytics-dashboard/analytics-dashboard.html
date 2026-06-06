@@ -1,0 +1,172 @@
+<div class="container mt-5">
+
+  <h2 class="mb-4">
+    Analytics Dashboard
+  </h2>
+
+  <!-- TOTAL REVENUE -->
+
+  <div class="row mb-4">
+
+    <div class="col-md-12">
+
+      <div class="card text-center shadow">
+
+        <div class="card-body">
+
+          <h4>Total Revenue</h4>
+
+          <h2 class="text-success">
+
+            ₹ {{ revenue.totalRevenue }}
+
+          </h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SALES BY BRAND -->
+
+  <div class="card mb-4 shadow">
+
+    <div class="card-header">
+
+      <h5>Sales By Brand</h5>
+
+    </div>
+
+    <div class="card-body">
+
+      <table
+        class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+          <tr>
+
+            <th>Brand</th>
+
+            <th>Total Revenue</th>
+
+            <th>Units Sold</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of salesByBrand">
+
+            <td>{{ item.brandName }}</td>
+
+            <td>₹ {{ item.totalRevenue }}</td>
+
+            <td>{{ item.totalUnitsSold }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- TOP SELLING MODELS -->
+
+  <div class="card mb-4 shadow">
+
+    <div class="card-header">
+
+      <h5>Top Selling Models</h5>
+
+    </div>
+
+    <div class="card-body">
+
+      <table
+        class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+          <tr>
+
+            <th>Car Model</th>
+
+            <th>Units Sold</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of topModels">
+
+            <td>{{ item.carModelName }}</td>
+
+            <td>{{ item.unitsSold }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- LOW STOCK -->
+
+  <div class="card shadow">
+
+    <div class="card-header">
+
+      <h5>Low Stock Alert</h5>
+
+    </div>
+
+    <div class="card-body">
+
+      <table
+        class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+          <tr>
+
+            <th>Car Model</th>
+
+            <th>Quantity In Stock</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of lowStock">
+
+            <td>{{ item.carModelName }}</td>
+
+            <td>{{ item.quantityInStock }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

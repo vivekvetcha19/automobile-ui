@@ -1,0 +1,170 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>Create Service Record</h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- CUSTOMER -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Customer
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="customerId"
+          [(ngModel)]="service.customerId">
+
+          <option [value]="0">
+
+            Select Customer
+
+          </option>
+
+          <option
+            *ngFor="let customer of customers"
+            [value]="customer.id">
+
+            {{ customer.firstName }}
+            {{ customer.lastName }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="customerError"
+          class="text-danger mt-1">
+
+          {{ customerError }}
+
+        </div>
+
+      </div>
+
+      <!-- CAR MODEL -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Car Model
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="carModelId"
+          [(ngModel)]="service.carModelId">
+
+          <option [value]="0">
+
+            Select Car Model
+
+          </option>
+
+          <option
+            *ngFor="let model of carModels"
+            [value]="model.id">
+
+            {{ model.brandName }}
+            -
+            {{ model.name }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="carModelError"
+          class="text-danger mt-1">
+
+          {{ carModelError }}
+
+        </div>
+
+      </div>
+
+      <!-- SERVICE DESCRIPTION -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Service Description
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <textarea
+          class="form-control"
+          rows="4"
+          name="serviceDescription"
+          [(ngModel)]="service.serviceDescription"
+          maxlength="500">
+
+        </textarea>
+
+        <div
+          *ngIf="descriptionError"
+          class="text-danger mt-1">
+
+          {{ descriptionError }}
+
+        </div>
+
+      </div>
+
+      <!-- SERVICE COST -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Service Cost
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="serviceCost"
+          [(ngModel)]="service.serviceCost"
+          min="1">
+
+        <div
+          *ngIf="costError"
+          class="text-danger mt-1">
+
+          {{ costError }}
+
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        Create Service Record
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
