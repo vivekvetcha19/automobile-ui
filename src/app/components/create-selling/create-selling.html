@@ -1,0 +1,168 @@
+<div class="card mt-4">
+
+  <div class="card-header">
+
+    <h4>Create Sale</h4>
+
+  </div>
+
+  <div class="card-body">
+
+    <form (ngSubmit)="onSubmit()">
+
+      <!-- CUSTOMER -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Customer
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="customerId"
+          [(ngModel)]="sale.customerId">
+
+          <option [value]="0">
+
+            Select Customer
+
+          </option>
+
+          <option
+            *ngFor="let customer of customers"
+            [value]="customer.id">
+
+            {{ customer.firstName }}
+            {{ customer.lastName }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="customerError"
+          class="text-danger mt-1">
+
+          {{ customerError }}
+
+        </div>
+
+      </div>
+
+      <!-- CAR MODEL -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Car Model
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select"
+          name="carModelId"
+          [(ngModel)]="sale.carModelId">
+
+          <option [value]="0">
+
+            Select Car Model
+
+          </option>
+
+          <option
+            *ngFor="let model of carModels"
+            [value]="model.id">
+
+            {{ model.brandName }}
+            -
+            {{ model.name }}
+
+          </option>
+
+        </select>
+
+        <div
+          *ngIf="carModelError"
+          class="text-danger mt-1">
+
+          {{ carModelError }}
+
+        </div>
+
+      </div>
+
+      <!-- QUANTITY -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Quantity Sold
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="quantitySold"
+          [(ngModel)]="sale.quantitySold"
+          min="1">
+
+        <div
+          *ngIf="quantityError"
+          class="text-danger mt-1">
+
+          {{ quantityError }}
+
+        </div>
+
+      </div>
+
+      <!-- SELLING PRICE -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Selling Price
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          name="sellingPrice"
+          [(ngModel)]="sale.sellingPrice"
+          min="1">
+
+        <div
+          *ngIf="priceError"
+          class="text-danger mt-1">
+
+          {{ priceError }}
+
+        </div>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary">
+
+        Create Sale
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

@@ -5,6 +5,7 @@ import { BrandList } from './components/brand-list/brand-list';
 import { CarModelListComponent } from './components/car-model-list/car-model-list';
 import { InventoryListComponent } from './components/inventory-list/inventory-list';
 import { CustomerListComponent } from './components/customer-list/customer-list';
+import { SellingListComponent } from './components/selling-list/selling-list';
 
 export const routes: Routes = [
 
@@ -31,6 +32,11 @@ export const routes: Routes = [
   {
      path: 'customers',
      component: CustomerListComponent
+  },
+
+  {
+    path: 'sales',
+    component:SellingListComponent
   }
 
 
